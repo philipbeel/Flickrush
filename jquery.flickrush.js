@@ -21,6 +21,7 @@
 
 		var options = $.extend(defaults,options);
 
+		// Return each instance of the flickrush
 		return this.each(function(options)
 		{
 			var act = $(this)
@@ -31,36 +32,41 @@
 			function(data)
 			{
 				var flickrImage
-				,	flickrImages = [];
+				,	integer
+				,	flickrImages = []
+				,	i;
 				
+				// Loop through each image item
 				$.each(data.items, function(i,item)
 				{
+					// Create an image DOM node
 					if (i <= defaults.limit-1)
 					{
+						// Assign the image with attributes
 						flickrImage = $("<img/>").attr({
 							src: item.media.m,
 							alt: item.tags
 						});
 
-						if (defaults.random)
-							flickrImages.push(flickrImage);
+						// Push flickr images into array
+						flickrImages.push(flickrImage);
 					}
 
-					if(!defaults.random)
-						$(act).append(flickrImage);
-				});	
-					
-					if (defaults.random)
-					{
-						console.log("come and get me!!!");
-						// Randomise photos
-						for (var i = 0; i < flickrImages.length; i++) {
-							// Output the random photos
-							// console.log(flickrImages[i]);
-							$(act).append(flickrImages[Math.floor(Math.random() * flickrImages.length-1)]);
-						};
-					}
+				});
 
+				// Mix the order of flickr images if required
+				if(defaults.random === true)
+				{
+					// Randomise the image array order
+					flickrImages.sort(function() { 
+						return 0.5 - Math.random();
+					});	
+				}
+
+				// append flickr images to the specified DOM element 
+				for (var i = 0; i < flickrImages.length; i++) {
+					$(act).append(flickrImages[i]);
+				};
 			});
 			
 		});
