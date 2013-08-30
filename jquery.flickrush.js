@@ -16,16 +16,30 @@
 		var defaults = {
 			limit:3,
 			random:true,
-			id:'44499772@N06'
+			id:'44499772@N06',
+			tags:false, /* comma separated value: 'tagsone,tagstwo,totango' */
+			ssl:false
 		};
 
 		var options = $.extend(defaults,options);
+
+		var flickrurl;
+
+		if(defaults.ssl == false){
+			flickrurl = "http://api.flickr.com/services/feeds/photos_public.gne?format=json";
+		} else {
+			flickrurl = "https://secure.flickr.com/services/feeds/photos_public.gne?format=json";
+		}
+
+		if(defaults.tags != false){
+			flickrurl += '&tags=' + defaults.tags;
+		}
 
 		// Return each instance of the flickrush
 		return this.each(function(options)
 		{
 			var act = $(this)
-			,	apiCall = "http://api.flickr.com/services/feeds/photos_public.gne?format=json";
+			,	apiCall = flickrurl;
 		
 			$.getJSON(apiCall + "&id=" + defaults.id + "&jsoncallback=?",
 		
