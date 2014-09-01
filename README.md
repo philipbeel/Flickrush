@@ -2,7 +2,7 @@ Flickrush - A jQuery plugin to display flickr photo streams
 ========================================================
 
 GitHub  : https://github.com/philipbeel/Flickrush<br/>
-Demo    : http://theodin.co.uk/tools/tutorials/jqueryTutorial/plugins/flickrush/index.html<br/>
+Demo    : http://plugins.theodin.co.uk/flickrush/demo/<br/>
 Website : http://theodin.co.uk<br/>
 Email   : contact@theodin.co.uk<br/>
 Twitter : @philipbeel<br/>
