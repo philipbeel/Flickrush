@@ -1,11 +1,11 @@
 /*
- * Flickrush 1.3 - A jQuery flickr plugin
+ * Flickrush 1.4 - A jQuery flickr plugin
  *
  * Copyright (c) 2010 Philip Beel (http://www.theodin.co.uk/)
  * Dual licensed under the MIT (http://www.opensource.org/licenses/mit-license.php) 
  * and GPL (http://www.opensource.org/licenses/gpl-license.php) licenses.
  *
- * Revision: $Id: jquery.flickrush.js 2013-09-15 $ 
+ * Revision: $Id: jquery.flickrush.js 2015-05-05 $ 
  *
  */
 (function($){
@@ -47,11 +47,10 @@
 			{
 				var flickrImage
 				,	integer
-				,	flickrImages = []
-				,	i;
+				,	flickrImages = [];
 				
 				// Loop through each image item
-				$.each(data.items, function(i,item)
+				data.items.forEach(function (item, i) 
 				{
 					// Create an image DOM node
 					if (i <= defaults.limit-1)
@@ -64,12 +63,11 @@
 
 						// Push flickr images into array
 						flickrImages.push(flickrImage);
-					}
-
-				});
+					}					
+				})
 
 				// Mix the order of flickr images if required
-				if(defaults.random === true)
+				if(defaults.random === true && defaults.limit >1)
 				{
 					// Randomise the image array order
 					flickrImages.sort(function() { 
@@ -78,9 +76,9 @@
 				}
 
 				// append flickr images to the specified DOM element 
-				for (var i = 0; i < flickrImages.length; i++) {
-					$(act).append(flickrImages[i]);
-				};
+				flickrImages.forEach(function (image) {
+					$(act).append(image);
+				});
 			});
 			
 		});
