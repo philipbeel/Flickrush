@@ -46,33 +46,38 @@
 			function(data)
 			{
 				var flickrImage
+				,	limit = (defaults.limit === 1) ? 10: defaults.limit
 				,	integer
 				,	flickrImages = [];
 				
 				// Loop through each image item
 				data.items.forEach(function (item, i) 
 				{
-					// Create an image DOM node
-					if (i <= defaults.limit-1)
+					
+					if (i <= limit-1)
 					{
-						// Assign the image with attributes
 						flickrImage = $("<img/>").attr({
 							src: item.media.m,
 							alt: item.tags
 						});
 
-						// Push flickr images into array
 						flickrImages.push(flickrImage);
 					}					
 				})
 
-				// Mix the order of flickr images if required
-				if(defaults.random === true && defaults.limit >1)
+				if(defaults.random === true)
 				{
-					// Randomise the image array order
 					flickrImages.sort(function() { 
 						return 0.5 - Math.random();
-					});	
+					});
+
+					// Monkey patch to ensure when only 1 photo limit is passed the 
+					// single item will be randomised in the response
+					if(defaults.limit === 1) {
+						var tmpFlickrImages = flickrImages;
+						flickrImages = [];
+						flickrImages.push(tmpFlickrImages[0]);
+					}
 				}
 
 				// append flickr images to the specified DOM element 
