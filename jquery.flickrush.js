@@ -12,12 +12,12 @@
 
 	$.fn.flickrush=function(options)
 	{
-
 		var defaults = {
 			limit:3,
 			random:true,
 			id:'30005186@N02',
-			tags:false
+			tags:false,
+			size: 'm'
 		};
 
 		var options = $.extend(defaults,options)
@@ -56,8 +56,10 @@
 					
 					if (i <= limit-1)
 					{
+						var imageSource = item.media.m.replace('_m.', '_' + defaults.size+'.');
+
 						flickrImage = $("<img/>").attr({
-							src: item.media.m,
+							src: imageSource,
 							alt: item.tags
 						});
 

@@ -28,3 +28,4 @@ Initiate flickrush on your selected element, pass in the specified flickr user I
 >id: {String}           	// ID of the flickr user <br/>
 >limit: {Integer}     	 	// The number of photos to display <br/>
 >random: {Boolean}          // Display the photos in a random sequence <br/>
+>size: {String}          	// Display the photos in a specific [size](https://www.flickr.com/services/api/misc.urls.html) <br/>
